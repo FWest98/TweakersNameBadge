@@ -40,14 +40,16 @@ body {
 .badge {
     width: 400px;
     height: 280px;
-    background-color: #EEE;
+    background-color: #EEE !important;
     padding: 0;
     display: block;
     float: left;
     margin: 20px;
     overflow: hidden;
 
-    img { display: block; }
+    img {
+        display: block;
+    }
 
     .image {
         margin: 20px;
@@ -80,17 +82,21 @@ body {
         line-height: 20px;
         padding-top: 5px;
 
-        &:before { content: "AKA: "; font-size: 16px; color: #333; }
+        &:before {
+            content: "AKA: ";
+            font-size: 16px;
+            color: #333;
+        }
     }
 
-    .bio { 
-        display: block; 
+    .bio {
+        display: block;
         font-size: 16px;
         padding-top: 6px;
 
-        &:before { 
-            color: #B9133C; 
-            text-align: right; 
+        &:before {
+            color: #B9133C;
+            text-align: right;
             width: 90px;
             display: block;
             padding-right: 19px;
@@ -101,6 +107,7 @@ body {
 
     .beroep {
         padding-top: 22px;
+
         &:before {
             content: "Beroep: ";
         }
@@ -108,7 +115,10 @@ body {
 
     .opleiding {
         padding-top: 7px;
-        &:before { content: "Opleiding: "; }
+
+        &:before {
+            content: "Opleiding: ";
+        }
     }
 
     .karma {
@@ -122,12 +132,14 @@ body {
         .karmaRanking {
             color: #555;
 
-            &:before { content: " - "; }
+            &:before {
+                content: " - ";
+            }
         }
     }
 
     .tweakotine {
-        float: right; 
+        float: right;
         display: block;
         padding-right: 30px;
 
@@ -135,5 +147,12 @@ body {
             display: block;
             content: "Tweakotine: ";
         }
+    }
+}
+
+@media print {
+    .badge:nth-child(3n+4) {
+        page-break-before: always !important;
+        float: none;
     }
 }

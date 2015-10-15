@@ -138,6 +138,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Main.less" />
     <Content Include="Content\Print.less" />
+    <None Include="Properties\PublishProfiles\MapGear.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
