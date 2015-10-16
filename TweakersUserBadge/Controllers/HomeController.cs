@@ -78,11 +78,11 @@ namespace TweakersUserBadge.Controllers {
                         if (rightTitles[i]?.InnerText == null) continue;
                         switch(rightTitles[i].InnerText) {
                             case "Beroep": {
-                                    user.Beroep = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerHtml;
+                                    user.Beroep = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
                                     break;
                             }
                             case "Opleiding": {
-                                    user.Education = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerHtml;
+                                    user.Education = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
                                     break;
                             }
                             default: { break; }
@@ -92,11 +92,12 @@ namespace TweakersUserBadge.Controllers {
                     users.Add(user);
                     cache.Add(name.ToLower(), user, DateTime.Now.AddDays(1));
                 } catch {
-                    // ignored
+                    // Add to cache
+                    cache.Add(name.ToLower(), new User { Username = null }, DateTime.Now.AddDays(1));
                 }
             }
 
-            return View(users);
+            return View(users.Where(s => s.Username != null).ToList());
         }
 
         public class User {
