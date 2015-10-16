@@ -10,6 +10,9 @@
 </head>
 <body>
 <div class="badges">
+    @if(Model.Count == 0) {
+        @:Geen resultaten!
+    }
     @foreach (var user in Model) {
         <div class="badge">
             <img src="~/Content/header.png"/>
