@@ -33,10 +33,10 @@ namespace TweakersUserBadge.Controllers {
             foreach (var name in names.Select(s => s.Trim().ToUpperInvariant()).Where(s => s.Length >= 3).Distinct()) {
                 // Get from cache or get from web
                 var user = await GetFromCache(name, async () => await GetUserFromWeb(name));
-                users.Add(user);
+                if(user != null) users.Add(user);
             }
 
-            return View(users.Where(s => s != null).ToList());
+            return View(users);
         }
 
         private async Task<T> GetFromCache<T>(string key, Func<Task<T>> valueFunc) {
@@ -84,16 +84,14 @@ namespace TweakersUserBadge.Controllers {
                 for (var i = 0; i < rightTitles?.Count; i++) {
                     if (rightTitles[i]?.InnerText == null) continue;
                     switch (rightTitles[i].InnerText) {
-                        case "Beroep":
-                            {
-                                user.Beroep = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
-                                break;
-                            }
-                        case "Opleiding":
-                            {
-                                user.Education = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
-                                break;
-                            }
+                        case "Beroep": {
+                            user.Beroep = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
+                            break;
+                        }
+                        case "Opleiding": {
+                            user.Education = personalInfoRightColumn.SelectNodes(".//tr/td")?[i * 2 + 1]?.InnerText;
+                            break;
+                        }
                         default: { break; }
                     }
                 }
